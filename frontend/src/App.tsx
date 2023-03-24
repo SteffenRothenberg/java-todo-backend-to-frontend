@@ -24,6 +24,7 @@ function App() {
         loadAllToDos()
     },[])
 
+
     function addTodo() {
         axios.post("/api/todo", {description: todoAdded, id:"", status: "OPEN"})
         .then((response) => {
@@ -35,13 +36,27 @@ function App() {
     }
 
     function advanceFromOpenToInProgress(id: string) {
-        axios.put("api/todo/" + id, {status: "IN_PROGRESS"})
-            .then(() =>{
+        const updatedTodo = {
+            id: id,
+            description: "",
+            status: "IN_PROGRESS"
+        };
+        axios.put(`/api/todo/${id}`, updatedTodo)
+            .then(() => {
                 loadAllToDos();
             })
-            .catch(()=> console.error("put on /api/todo not successful"))
+            .catch(() => console.error("put on /api/todo not successful"))
     }
 
+    //Fail 1 Robin
+    // function advanceFromOpenToInProgress(id: string) {
+    //     axios.put("api/todo/" + id, {status: "IN_PROGRESS"})
+    //         .then(() =>{
+    //             loadAllToDos();
+    //         })
+    //         .catch(()=> console.error("put on /api/todo not successful"))
+    // }
+    // Team version
     // function advanceFromOpenToInProgress(id: string) {
     //     axios.put("api/todo/" + id, {status: todoEdit})
     //         .then((response ) =>{
