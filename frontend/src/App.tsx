@@ -36,17 +36,40 @@ function App() {
     }
 
     function advanceFromOpenToInProgress(id: string) {
-        const updatedTodo = {
-            id: id,
-            description: "",
-            status: "IN_PROGRESS"
-        };
-        axios.put(`/api/todo/${id}`, updatedTodo)
-            .then(() => {
-                loadAllToDos();
-            })
-            .catch(() => console.error("put on /api/todo not successful"))
+        const todoToUpdate = todoList.find(todo => todo.id === id);
+        if (todoToUpdate) {
+            let updatedStatus;
+            if (todoToUpdate.status === "OPEN") {
+                updatedStatus = "IN_PROGRESS";
+            } else if (todoToUpdate.status === "IN_PROGRESS") {
+                updatedStatus = "DONE";
+            }
+            const updatedTodo = {
+                ...todoToUpdate,
+                status: updatedStatus
+            };
+            axios
+                .put(`/api/todo/${id}`, updatedTodo) //Wird so benötigt da wir warum auch immer ein ID Problem haben
+                .then(() => {                           //Hier wird die ID abgefrag ? jedenfalls funktioniert es damit
+                    loadAllToDos();
+                })
+                .catch(() => console.error("put on /api/todo not successful"));
+        }
     }
+
+    //Hier nur von OPEN zu IN_PROGRESS
+    // function advanceFromOpenToInProgress(id: string) {
+    //     const updatedTodo = {
+    //         id: id,
+    //         description: "",
+    //         status: "IN_PROGRESS"
+    //     };
+    //     axios.put(`/api/todo/${id}`, updatedTodo)
+    //         .then(() => {
+    //             loadAllToDos();
+    //         })
+    //         .catch(() => console.error("put on /api/todo not successful"))
+    //}
 
     //Fail 1 Robin
     // function advanceFromOpenToInProgress(id: string) {

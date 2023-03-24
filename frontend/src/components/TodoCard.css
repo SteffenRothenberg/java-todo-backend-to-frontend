@@ -18,3 +18,12 @@
 .todo-card__status {
     font-style: italic;
 }
+
+.AdvancedButton {
+    justify-content: flex-end;
+    justify-items: flex-end;
+    align-content: flex-end;
+    align-items: flex-end;
+    /*WARUM FUNKTIONIERT HIER NIX !!!!!*/
+
+}
