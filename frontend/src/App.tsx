@@ -34,7 +34,6 @@ function App() {
             .catch(()=> console.error("post on /api/todo not successful"))
     }
 
-
     function advanceFromOpenToInProgress(id: string) {
         axios.put("api/todo/" + id, {status: todoEdit})
             .then((response ) =>{
