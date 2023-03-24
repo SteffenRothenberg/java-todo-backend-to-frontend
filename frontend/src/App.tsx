@@ -9,11 +9,10 @@ function App() {
         setToDoText(value);
     }
 
-    function addToDoButton() {
-        const newToDo = addToDoText.trim();
+    function addToDo() {
+        const newToDo = addToDoText;
         if (newToDo !== '') {
-            axios
-                .post('/api/todo', {
+            axios.post('/api/todo', {
                     title: newToDo,
                     done: false,
                 })
@@ -21,9 +20,6 @@ function App() {
                     console.log(response);
                     setToDoText('');
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
         }
     }
 
@@ -32,12 +28,13 @@ function App() {
             <header className="ToDo-List"></header>
             <ActionBar inputText={addToDoText} onChange={onChange} />
             <p>
-                <button className="ButtonOne" onClick={addToDoButton}>
+                <button className="ButtonOne" onClick={addToDo}>
                     Save ToDo
                 </button>
             </p>
         </div>
     );
+
 }
 
 export default App;
