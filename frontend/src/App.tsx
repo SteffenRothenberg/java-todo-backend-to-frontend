@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ActionBar from "./ActionBar";
-//import axios from "axios";
+import axios from "axios";
 
 function addToDoButton() {
 
@@ -14,6 +14,17 @@ function App() {
     function onChange(value: string) {
         setToDoText(value)
     }
+    function loadAllToDos()
+    {axios.get("/api/todo")
+        .then((response) => {
+            setToDoText(response.data.results)
+        })}
+    function addToDo()
+    {axios.post("/api/todo")
+        .then((response) => {
+            setToDoText(response.data.results)
+        })}
+
   return (
 
     <div className="App">
