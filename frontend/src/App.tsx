@@ -34,13 +34,20 @@ function App() {
             .catch(()=> console.error("post on /api/todo not successful"))
     }
 
-
     function advanceFromOpenToInProgress(id: string) {
-        axios.put("api/todo/" + id, {status: todoEdit})
-            .then((response ) =>{
-                editTodoStatus("IN_PROGRESS")
+        axios.put("api/todo/" + id, {status: "IN_PROGRESS"})
+            .then(() =>{
+                loadAllToDos();
             })
+            .catch(()=> console.error("put on /api/todo not successful"))
     }
+
+    // function advanceFromOpenToInProgress(id: string) {
+    //     axios.put("api/todo/" + id, {status: todoEdit})
+    //         .then((response ) =>{
+    //             editTodoStatus("IN_PROGRESS")
+    //         })
+    // }
 
   return (
 
