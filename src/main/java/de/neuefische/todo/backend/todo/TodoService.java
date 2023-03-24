@@ -20,9 +20,7 @@ class TodoService {
 
     public Todo save(Todo todo) {
         String id = UUID.randomUUID().toString();
-
         Todo todoToSave = todo.withId(id);
-
         return todoRepository.save(todoToSave);
     }
 
