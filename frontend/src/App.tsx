@@ -30,8 +30,9 @@ function App() {
     <div className="App">
       <header className="ToDo-List"></header>
         <ActionBar inputText={addToDoText} onChange={onChange}/>
-        <p><button className="ButtonOne" onClick={addToDoButton}>
-            Click me </button></p>
+        <p><button className="SubmitButton" onClick={addToDoButton}>
+            Submit </button></p>
+
     </div>
   );
 }
