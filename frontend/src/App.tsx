@@ -30,6 +30,8 @@ function App() {
             setAddTodo(response.data)
         })
             .then(()=> loadAllToDos())
+            .then(() => setAddTodo(""))
+            .catch(()=> console.error("post on /api/todo not successful"))
     }
 
   return (
