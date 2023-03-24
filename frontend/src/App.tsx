@@ -10,6 +10,7 @@ function App() {
 
     const [todoList, setToDoList] = useState<Todo[]>([])
     const [todoAdded, setAddTodo] = useState<string>("")
+    const [todoEdit, editTodoStatus] = useState<string>("OPEN")
 
     function onChange(value: string) {
         setAddTodo(value)
@@ -23,8 +24,7 @@ function App() {
         loadAllToDos()
     },[])
 
-    function addTodo()
-    {
+    function addTodo() {
         axios.post("/api/todo", {description: todoAdded, id:"", status: "OPEN"})
         .then((response) => {
             setAddTodo(response.data)
@@ -34,12 +34,20 @@ function App() {
             .catch(()=> console.error("post on /api/todo not successful"))
     }
 
+
+    function advanceFromOpenToInProgress(id: string) {
+        axios.put("api/todo/" + id, {status: todoEdit})
+            .then((response ) =>{
+                editTodoStatus("IN_PROGRESS")
+            })
+    }
+
   return (
 
     <div className="App">
       <header className="ToDo-List"></header>
         <ActionBar inputText={todoAdded} onChange={onChange} addTodo={addTodo}/>
-        <TodoGallery todos={todoList} />
+        <TodoGallery todos={todoList} advanceFromOpenToInProgress={advanceFromOpenToInProgress} />
     </div>
   );
 }
