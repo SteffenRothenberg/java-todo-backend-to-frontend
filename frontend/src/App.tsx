@@ -1,37 +1,39 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ActionBar from "./ActionBar";
 import axios from "axios";
-
-function addToDoButton() {
-
-}
-
+import TodoGallery from "./components/TodoGallery";
+import {Todo} from "./model/Todo";
 function App() {
 
-    const [addToDoText, setToDoText] = useState("")
+    const [todoList, setToDoList] = useState<Todo[]>([])
+    const [todoAdded, setAddTodo] = useState<string>("")
+
     function onChange(value: string) {
-        setToDoText(value)
+        setAddTodo(value)
     }
     function loadAllToDos()
     {axios.get("/api/todo")
         .then((response) => {
-            setToDoText(response.data.results)
+            setToDoList(response.data)
         })}
-    function addToDo()
+    useEffect(( ) => {
+        loadAllToDos()
+    },[])
+
+    function addTodo()
     {axios.post("/api/todo")
         .then((response) => {
-            setToDoText(response.data.results)
+            setToDoList(response.data)
         })}
 
   return (
 
     <div className="App">
       <header className="ToDo-List"></header>
-        <ActionBar inputText={addToDoText} onChange={onChange}/>
-        <p><button className="SubmitButton" onClick={addToDoButton}>
-            Submit </button></p>
+        <ActionBar inputText={todoAdded} onChange={onChange} addTodo={addTodo}/>
+        <TodoGallery todos={todoList} />
 
     </div>
   );
