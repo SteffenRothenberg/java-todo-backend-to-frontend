@@ -1,0 +1,10 @@
+
+.todo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:  center;
+}
+
+.todo-gallery .todo-card {
+    margin: 12px;
+}

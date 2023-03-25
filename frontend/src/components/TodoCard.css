@@ -1,0 +1,29 @@
+.todo-card {
+    padding: 24px;
+    width: 300px;
+    text-align: center;
+    color: white;
+    background-color: #3c3e44;
+    border: 1px solid #333;
+    border-radius: 12px;
+}
+.todo-card__description {
+    margin-bottom: 12px;
+}
+
+.todo-card__id {
+    width: 100%;
+}
+
+.todo-card__status {
+    font-style: italic;
+}
+
+.AdvancedButton {
+    justify-content: flex-end;
+    justify-items: flex-end;
+    align-content: flex-end;
+    align-items: flex-end;
+    /*WARUM FUNKTIONIERT HIER NIX !!!!!*/
+
+}

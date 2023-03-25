@@ -1,9 +1,10 @@
-import {ChangeEvent} from "react";
+import React, {ChangeEvent} from "react";
 
 
 type ActionBarProps = {
     inputText: string,
     onChange: (value: string) => void
+    addTodo: () => void
 }
 export default function ActionBar(props: ActionBarProps) {
 
@@ -13,6 +14,8 @@ export default function ActionBar(props: ActionBarProps) {
     return (
         <div>
             <input className="actionBarInput" value={props.inputText} onChange={onTextChange}/>
+            <button className="SubmitButton" onClick={props.addTodo}>
+                Submit </button>
         </div>
     )
 }
