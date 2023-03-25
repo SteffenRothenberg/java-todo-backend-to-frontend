@@ -57,35 +57,6 @@ function App() {
         }
     }
 
-    //Hier nur von OPEN zu IN_PROGRESS
-    // function advanceFromOpenToInProgress(id: string) {
-    //     const updatedTodo = {
-    //         id: id,
-    //         description: "",
-    //         status: "IN_PROGRESS"
-    //     };
-    //     axios.put(`/api/todo/${id}`, updatedTodo)
-    //         .then(() => {
-    //             loadAllToDos();
-    //         })
-    //         .catch(() => console.error("put on /api/todo not successful"))
-    //}
-
-    //Fail 1 Robin
-    // function advanceFromOpenToInProgress(id: string) {
-    //     axios.put("api/todo/" + id, {status: "IN_PROGRESS"})
-    //         .then(() =>{
-    //             loadAllToDos();
-    //         })
-    //         .catch(()=> console.error("put on /api/todo not successful"))
-    // }
-    // Team version
-    // function advanceFromOpenToInProgress(id: string) {
-    //     axios.put("api/todo/" + id, {status: todoEdit})
-    //         .then((response ) =>{
-    //             editTodoStatus("IN_PROGRESS")
-    //         })
-    // }
 
   return (
 
@@ -97,3 +68,33 @@ function App() {
   );
 }
 export default App;
+
+//Hier nur von OPEN zu IN_PROGRESS
+// function advanceFromOpenToInProgress(id: string) {
+//     const updatedTodo = {
+//         id: id,
+//         description: "",
+//         status: "IN_PROGRESS"
+//     };
+//     axios.put(`/api/todo/${id}`, updatedTodo)
+//         .then(() => {
+//             loadAllToDos();
+//         })
+//         .catch(() => console.error("put on /api/todo not successful"))
+//}
+
+//Fail 1 Robin
+// function advanceFromOpenToInProgress(id: string) {
+//     axios.put("api/todo/" + id, {status: "IN_PROGRESS"})
+//         .then(() =>{
+//             loadAllToDos();
+//         })
+//         .catch(()=> console.error("put on /api/todo not successful"))
+// }
+// Team version
+// function advanceFromOpenToInProgress(id: string) {
+//     axios.put("api/todo/" + id, {status: todoEdit})
+//         .then((response ) =>{
+//             editTodoStatus("IN_PROGRESS")
+//         })
+// }
