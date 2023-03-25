@@ -37,12 +37,18 @@ function App() {
 
     function advanceFromOpenToInProgress(id: string) {
         const todoToUpdate = todoList.find(todo => todo.id === id);
+
         if (todoToUpdate) {
             let updatedStatus;
             if (todoToUpdate.status === "OPEN") {
                 updatedStatus = "IN_PROGRESS";
             } else if (todoToUpdate.status === "IN_PROGRESS") {
                 updatedStatus = "DONE";
+            } else if (todoToUpdate.status === "DONE" || null) {
+                axios.delete(`/api/todo/${id}`)
+                    .then(() => {
+                        loadAllToDos();
+                    })
             }
             const updatedTodo = {
                 ...todoToUpdate,
