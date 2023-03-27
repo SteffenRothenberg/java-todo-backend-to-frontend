@@ -6,6 +6,7 @@ import TodoGallery from "./components/TodoGallery";
 import {Todo} from "./model/Todo";
 import {Simulate} from "react-dom/test-utils";
 import load = Simulate.load;
+
 function App() {
 
     const [todoList, setToDoList] = useState<Todo[]>([])
@@ -15,24 +16,27 @@ function App() {
     function onChange(value: string) {
         setAddTodo(value)
     }
-    function loadAllToDos()
-    {axios.get("/api/todo")
-        .then((response) => {
-            setToDoList(response.data)
-        })}
-    useEffect(( ) => {
+
+    function loadAllToDos() {
+        axios.get("/api/todo")
+            .then((response) => {
+                setToDoList(response.data)
+            })
+    }
+
+    useEffect(() => {
         loadAllToDos()
-    },[])
+    }, [])
 
 
     function addTodo() {
-        axios.post("/api/todo", {description: todoAdded, id:"", status: "OPEN"})
-        .then((response) => {
-            setAddTodo(response.data)
-        })
-            .then(()=> loadAllToDos())
+        axios.post("/api/todo", {description: todoAdded, id: "", status: "OPEN"})
+            .then((response) => {
+                setAddTodo(response.data)
+            })
+            .then(() => loadAllToDos())
             .then(() => setAddTodo(""))
-            .catch(()=> console.error("post on /api/todo not successful"))
+            .catch(() => console.error("post on /api/todo not successful"))
     }
 
     function advanceFromOpenToInProgress(id: string) {
@@ -44,22 +48,23 @@ function App() {
                 updatedStatus = "IN_PROGRESS";
             } else if (todoToUpdate.status === "IN_PROGRESS") {
                 updatedStatus = "DONE";
-            } else if (todoToUpdate.status === "DONE" || null) {
+            } else if (todoToUpdate.status === "DONE") {
                 axios.delete(`/api/todo/${id}`)
                     .then(() => {
                         loadAllToDos();
                     })
+                return;
             }
             const updatedTodo = {
                 ...todoToUpdate,
                 status: updatedStatus
             };
-            axios
-                .put(`/api/todo/${id}`, updatedTodo) //Wird so benötigt da wir warum auch immer ein ID Problem haben
-                .then(() => {                           //Hier wird die ID abgefrag ? jedenfalls funktioniert es damit
-                    loadAllToDos();
-                })
-                .catch(() => console.error("put on /api/todo not successful"));
+                axios
+                    .put(`/api/todo/${id}`, updatedTodo) //Wird so benötigt da wir warum auch immer ein ID Problem haben
+                    .then(() => {                           //Hier wird die ID abgefrag ? jedenfalls funktioniert es damit
+                        loadAllToDos();
+                    })
+                    .catch(() => console.error("put on /api/todo not successful"));
         }
     }
 
@@ -93,13 +98,14 @@ function App() {
     //         })
     // }
 
-  return (
+    return (
 
-    <div className="App">
-      <header className="ToDo-List"></header>
-        <ActionBar inputText={todoAdded} onChange={onChange} addTodo={addTodo}/>
-        <TodoGallery todos={todoList} advanceFromOpenToInProgress={advanceFromOpenToInProgress} />
-    </div>
-  );
+        <div className="App">
+            <header className="ToDo-List"></header>
+            <ActionBar inputText={todoAdded} onChange={onChange} addTodo={addTodo}/>
+            <TodoGallery todos={todoList} advanceFromOpenToInProgress={advanceFromOpenToInProgress}/>
+        </div>
+    );
 }
+
 export default App;
